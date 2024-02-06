@@ -1,42 +1,29 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-
+import mysql.connector
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
-diccionario = {
-        "Mercedes": "mcast386@xtec.cat",
-        "Rayane": "rayane@rayane.sa",
-        "Mohamed": "moha@gmail.com",
-        "Jad": "jad@gmail.com",
-        "Oriol": "joam@gmail.com",
-        "Elias": "hola123@gmail.com",
-        "Armau": "arnau@gmail.com",
-        "Asdrúbal": "asdrubal@gmail.com",
-        "Adrian": "pedrosanchez@asix2.com",
-        "Emma": "pacosanz@gmail.com",
-        "nishwan": "nishwan@gmail.com",
-        "Javi": "javi@gmail.com",
-        "Novel": "novelferreras49@gmail.com",
-        "Bruno": "elcigala@gmail.com",
-        "David": "argentino@gmail.com",
-        "Judit": "judit@gmail.com",
-        "Joao": "joao@gmail.com",
-        "Laura": "laura@gmail.com",
-        "enrico": "123@gmail.com",
-        "Joel": "joelcobre@gmail.com",
-        "Aaron": "aaron@gmail.com",
-        "Moad": "moad@gmail.com",
-        }
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="aplicaciones_web"
+)
 
 @app.route('/getmail',methods = ['POST', 'GET'])
 def login():
    if request.method == 'POST':
       user = request.form['name']
-      if user in diccionario:
-         mail=diccionario[user]
-         return render_template('resultado.html',mail=mail,user=user)
+      mycursos = mydb.cursor()
+      mycursos.execute("SELECT Correo FROM alumnos WHERE Nombre = %s",(user,))
+      myresult = mycursos.fetchall()
+      if myresult:
+         for x in myresult:
+            mail=x
+            return render_template('resultado.html',mail=mail,user=user)
       else:
          return ("NO ENCONTRADO")
    else:
