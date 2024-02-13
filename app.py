@@ -5,7 +5,6 @@ import mysql.connector
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
-
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -14,7 +13,7 @@ mydb = mysql.connector.connect(
 )
 
 @app.route('/getmail',methods = ['POST', 'GET'])
-def login():
+def getmail():
    if request.method == 'POST':
       user = request.form['name']
       mycursos = mydb.cursor()
@@ -27,4 +26,23 @@ def login():
       else:
          return ("NO ENCONTRADO")
    else:
-      return render_template('formulario.html')
+      return render_template('formulario_getmail.html')
+
+@app.route('/addmail',methods = ['POST', 'GET'])
+def addmail():
+   if request.method == 'POST':
+      user = request.form['name']
+      mail = request.form['mail']
+      mycursos = mydb.cursor()
+      mycursos.execute("SELECT Correo FROM alumnos WHERE Nombre = %s",(user,))
+      myresult = mycursos.fetchall()
+      if myresult:
+         for x in myresult:
+            return ("REPETIDO")
+      else:
+          mycursor = mydb.cursor()
+          mycursor.execute("INSERT INTO alumnos (Nombre, Correo) VALUES (%s, %s)", (user,mail))
+          mydb.commit()
+          return ("Se añadio correctamente")
+   else:
+      return render_template('formulario_addmail.html')
