@@ -38,11 +38,11 @@ def addmail():
       myresult = mycursos.fetchall()
       if myresult:
          for x in myresult:
-            return ("REPETIDO")
+            return ("EL CORREO EXISTE")
       else:
           mycursor = mydb.cursor()
           mycursor.execute("INSERT INTO alumnos (Nombre, Correo) VALUES (%s, %s)", (user,mail))
           mydb.commit()
-          return ("Se añadio correctamente")
+          return ("CORREO AÑADIDO SATISFACTORIAMENTE")
    else:
       return render_template('formulario_addmail.html')
