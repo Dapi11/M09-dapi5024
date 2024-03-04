@@ -1,5 +1,5 @@
 h1 {
-    background-color: turquoise;
+    background-color: burlywood;
     text-align: center;
 }
 p {
@@ -9,3 +9,66 @@ p {
     font-size: 20px;
     font-weight: bold;
 }
+div{
+    text-align: center;
+}
+.error{
+    color: red;
+    font-size: 20;
+    font-weight: bold;
+}
+.correcto{
+    color: green;
+    font-size: 20;
+    font-weight: bold;
+}
+.menu1 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: burlywood;
+  }
+  
+.menu2 {
+    display: block;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+    text-align: center;
+    margin-left: 10%;
+  }
+  .imagen_cabecera{
+    width: 35px;
+    height: 35px;
+    float: right;
+  }
+  .titulo_pagina{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20;
+  }
+  .menu1_cabecera {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: burlywood;
+  }
+  
+.menu2_cabecera {
+    display: block;
+    color: black;
+    text-decoration: none;
+  }
+  .img_principal{
+    width: 300px;
+    padding: 20px;
+  }
+  .div_principal{
+    margin-left: 50%;
+    width: 100px;
+    height: 200px;
+    background-color: aqua;
+  }

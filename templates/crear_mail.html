@@ -10,28 +10,24 @@
    <body>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>      
       <div>
-      <form action = "http://localhost:5000/getmail" method = "post">
+      <form action = "http://localhost:5000/addmail" method = "post">
          <h1>InfoCaballos</h1>
          <img src="../static/caballologo.jpg" />
-         <p class="titulo">INICIAR SESION EN LA WEB</p>
+         <p class="titulo">CREAR UNA CUENTA</p>
          <p>CORREO</p>
          <input type = "email" name = "mail" required/>
-         <p>CONTRASEÑA</p>
+         <p>NOMBRE</p>
          <p><input type = "text" name = "password" /></p>
          <br><br>
-         <input type = "submit" value = "ENVIAR" class="btn btn-primary"/><br><br><br>
+         <input type = "submit" value = "ENVIAR" class="btn btn-primary"/>
+         <br><br>
          {% if error %}
          <p class="error">{{ error }}</p>
          {% endif %}
-         {% if correcto %}
-         <p class="correcto">{{ correcto }}</p>
-         {% endif %}
+         <br>
+         <a href="{{url_for('getmail')}}" class="btn btn-primary">INICIAR SESION</a>
+         <br>
       </form>
-     </div>
-     <br><br>
-     <div>
-      <p class="titulo">Si no tienes una cuenta</p>
-      <a href="{{url_for('addmail')}}" class="btn btn-primary">REGISTRARSE</a>
      </div>
    </body>
 </html>
