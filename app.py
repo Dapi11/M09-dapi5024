@@ -29,7 +29,7 @@ def getmail():
          correo = fila[0]
          if correo == mail:
             session['mail'] = mail
-            return render_template('principal.html',mail=mail)
+            return render_template('principal.html', mail=mail)
       else:
          error = 'El correo electrónico es inválido.'
          return render_template('formulario_getmail.html', error=error)
@@ -62,32 +62,44 @@ def addmail():
 
 @app.route('/adopcion',methods = ['POST', 'GET'])
 def adopcion():
-   if request.method == 'POST':
-      name = request.form['name']
-      surname1 = request.form['surname1']
-      surname2 = request.form['surname2']
-      number = request.form['number']
-      mail = request.form['mail']
-      address = request.form['address']
-      comments = request.form['comments']
-      mycursos = mydb.cursor()
-      mycursos.execute("SELECT Correo FROM alumnos WHERE Correo = %s",(mail,))
-      myresult = mycursos.fetchall()
-      if myresult:
-         fila = myresult[0]
-         correo = fila[0]
-         if correo == mail:
-            mycursor = mydb.cursor()
-            mycursor.execute("INSERT INTO adopcion (name, surname1, surname2, number, mail, address, comments) VALUES (%s, %s, %s, %s, %s, %s, %s)", (name,surname1,surname2,number,mail,address,comments))
-            mydb.commit()
-            correcto = "Se ha enviado correctamente el formulario"
-            return render_template('adopcion.html',correcto=correcto)
+   if session['mail']:
+      if request.method == 'POST':
+         name = request.form['name']
+         surname1 = request.form['surname1']
+         surname2 = request.form['surname2']
+         number = request.form['number']
+         mail = request.form['mail']
+         address = request.form['address']
+         comments = request.form['comments']
+         mycursos = mydb.cursor()
+         mycursos.execute("SELECT Correo FROM alumnos WHERE Correo = %s",(mail,))
+         myresult = mycursos.fetchall()
+         if myresult:
+            fila = myresult[0]
+            correo = fila[0]
+            if correo == mail:
+               mycursor = mydb.cursor()
+               mycursor.execute("INSERT INTO adopcion (name, surname1, surname2, number, mail, address, comments) VALUES (%s, %s, %s, %s, %s, %s, %s)", (name,surname1,surname2,number,mail,address,comments))
+               mydb.commit()
+               correcto = "Se ha enviado correctamente el formulario"
+               return render_template('adopcion.html',correcto=correcto)
+         else:
+            error = 'El correo electrónico no existe'
+            return render_template('adopcion.html', error=error)
       else:
-         error = 'El correo electrónico no existe'
-         return render_template('adopcion.html', error=error)
+         return render_template('adopcion.html')
    else:
-      return render_template('adopcion.html')
+      return render_template('formulario_getmail.html')
 
 @app.route('/principal',methods = ['POST', 'GET'])
 def principal():
    return render_template('principal.html')
+
+@app.route('/about',methods = ['POST', 'GET'])
+def about():
+   return render_template('about.html')
+
+@app.route('/ex1',methods = ['POST', 'GET'])
+def ex1():
+   return render_template('about.html')
+   

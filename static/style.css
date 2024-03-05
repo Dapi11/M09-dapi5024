@@ -37,17 +37,13 @@ div{
     text-decoration: none;
     float: left;
     text-align: center;
-    margin-left: 10%;
+    margin-left: 20%;
   }
-  .imagen_cabecera{
-    width: 35px;
-    height: 35px;
-    float: right;
-  }
+
   .titulo_pagina{
     text-align: center;
     font-weight: bold;
-    font-size: 20;
+    font-size: 30px;
   }
   .menu1_cabecera {
     list-style-type: none;
@@ -64,11 +60,16 @@ div{
   }
   .img_principal{
     width: 300px;
-    padding: 20px;
+    margin-bottom: 20px;
   }
   .div_principal{
-    margin-left: 50%;
     width: 100px;
     height: 200px;
-    background-color: aqua;
+    margin-left: 44%;
+  }
+
+  #div_texto_principal{
+    width: 700px;
+    text-align: center;
+    margin-left: 34%;
   }
