@@ -20,17 +20,12 @@
   <li class="menu2"><a href="{{url_for('about')}}">SOBRE NOSOTROS</a></li>
 </ul>
 </nav>
-
-<h1>ESTAS SON TODAS LAS PETES QUE HECHO CON FLASK</h1>
-
-<div>
-    <a class="btn btn-primary" href="{{url_for('ex1')}}" role="button">EX FLASK 1</a>
-    <a class="btn btn-primary" href="{{url_for('ex2')}}" role="button">EX FLASK 2</a>
+<div class="div_ex">
+<form action = "http://localhost:5000/ex2" method = "post">
+    <p class="titulo">EJERCICIO 2 - AÑO QUE CUMPLIRAS 100</p>
+    <p>DIME UNA EDAD</p>
+    <input type = "number" name = "edad"/>
+    <input type = "submit" value = "ENVIAR" class="btn btn-primary"/>
+    <br><br>
+    <a class="btn btn-primary" href="{{url_for('about')}}" role="button">ATRAS</a>
 </div>
-
-<!--footer>
-  <a class="btn btn-primary" href="{{url_for('logout')}}" role="button">CERRAR SESION</a>
-</footer>
-</body>
-</html>
--->

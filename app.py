@@ -62,7 +62,7 @@ def addmail():
 
 @app.route('/adopcion',methods = ['POST', 'GET'])
 def adopcion():
-   if session['mail']:
+   if session.get('mail'):
       if request.method == 'POST':
          name = request.form['name']
          surname1 = request.form['surname1']
@@ -93,13 +93,49 @@ def adopcion():
 
 @app.route('/principal',methods = ['POST', 'GET'])
 def principal():
-   return render_template('principal.html')
+   if session.get('mail'):
+      return render_template('principal.html')
+   else:
+      return render_template('formulario_getmail.html')
 
 @app.route('/about',methods = ['POST', 'GET'])
 def about():
-   return render_template('about.html')
+   if session.get('mail'):
+      return render_template('about.html')
+   else:
+      return render_template('formulario_getmail.html')
 
-@app.route('/ex1',methods = ['POST', 'GET'])
+@app.route("/ex1",methods = ['POST', 'GET'])
 def ex1():
-   return render_template('about.html')
+    if session.get('mail'):
+      if request.method == 'POST':
+         num = int(request.form['num'])
+         if num % 2 == 0:
+            return ("El nombre es par")
+         else:
+            return ("El nombre es impar")
+      else:
+         return render_template('ex1.html')
+    else:
+      return render_template('formulario_getmail.html')
+
+@app.route("/ex2",methods = ['POST', 'GET'])
+def ex2():
+   if session.get('mail'):
+      if request.method == 'POST':
+         edad = int(request.form['edad'])
+         edad = 100 - edad
+         anyo = int (edad + 2024)
+         return ("Cumpliar 100 años el año " + str(anyo))
+      else:
+         return render_template('ex2.html')
+   else:
+      return render_template('formulario_getmail.html')
+
+#@app.route('/logout')
+#def logoout():
+#   if session.get('mail'):
+#      session.pop('mail', default=None)
+#   return redirect(url_for('formulario_getmail.html'))
+   
    
